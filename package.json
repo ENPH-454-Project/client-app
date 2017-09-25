@@ -1,0 +1,27 @@
+{
+  "name": "client-app",
+  "version": "1.0.0",
+  "description": "Front end epplication for a raspberry pi Laser Mircophone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ENPH-454-Project/client-app.git"
+  },
+  "keywords": [
+    "Lser",
+    "Microphone",
+    "Raspberry",
+    "Pi",
+    "fornt",
+    "end"
+  ],
+  "author": "Colin MacLeod",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ENPH-454-Project/client-app/issues"
+  },
+  "homepage": "https://github.com/ENPH-454-Project/client-app#readme"
+}
