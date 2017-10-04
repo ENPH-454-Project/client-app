@@ -1,4 +1,5 @@
 import React from 'react'
+import GraphContainer from './containers/GraphContainer'
 
 
 export default class App extends React.Component {
@@ -13,6 +14,7 @@ export default class App extends React.Component {
     return(
       <div>
         <h1>Hello World</h1>
+        <GraphContainer />
       </div>
     )
   }
