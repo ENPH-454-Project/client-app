@@ -3,9 +3,14 @@ import Graph from '../components/Graph'
 
 // load your general data
 var chartData = [{test:1}]
+var loopData = [{uv:Math.random()}]
 
-var width = 700,
-  height = 300,
+for(var i=0;i<300;i++){
+  loopData.push({uv:Math.random()})
+}
+
+var width = 800,
+  height = 500,
   margins = {left: 100, right: 100, top: 50, bottom: 50},
   title = "User sample",
   // chart series,
@@ -27,9 +32,28 @@ var width = 700,
 export default class GraphContainer extends React.Component{
   constructor(props){
     super(props)
+    this.state={
+      data:loopData
+    }
+    this.newData = this.newData.bind(this)
+  }
+
+  newData() {
+    self = this;
+    window.setInterval(()=>{
+      var newArray = this.state.data.slice()
+      newArray.shift()
+      newArray.push({uv:Math.random()})
+      this.setState({
+        data: newArray
+      })
+      console.log(this.state.data)
+    }, 500);
+
   }
 
   render() {
-    return <Graph title="test"/>
+
+    return <Graph title="test" data={this.state.data} newData={this.newData} width={width} height={height}/>
   }
 }
