@@ -2,38 +2,47 @@ import React from 'react'
 import Graph from '../components/Graph'
 
 // load your general data
-var chartData = [{test:1}]
-var loopData = [{uv:Math.random()}]
-
+var loopData = [Math.random()]
 for(var i=0;i<50;i++){
-  loopData.push({uv:Math.random()})
+  loopData.push(Math.random())
 }
+var chartData = {
+  labels: ['','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''],
+  datasets: [
+    {
+      label: 'Data',
+      fill: false,
+      lineTension: 0.1,
+      backgroundColor: 'rgba(75,192,192,0.4)',
+      borderColor: 'rgba(75,192,192,1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: loopData
+    }
+  ]}
+
+
+
 
 var width = 800,
-  height = 500,
-  margins = {left: 100, right: 100, top: 50, bottom: 50},
-  title = "User sample",
-  // chart series,
-  // field: is what field your data want to be selected
-  // name: the name of the field that display in legend
-  // color: what color is the line
-  chartSeries = [
-    {
-      field: 'BMI',
-      name: 'BMI',
-      color: '#ff7f0e'
-    }
-  ],
-  // your x accessor
-  x = function(d) {
-    return d.index;
-  }
+  height = 500
 
 export default class GraphContainer extends React.Component{
   constructor(props){
     super(props)
     this.state={
-      data:loopData
+      data:chartData
     }
     this.newData = this.newData.bind(this)
   }
@@ -41,19 +50,21 @@ export default class GraphContainer extends React.Component{
   newData() {
     self = this;
     window.setInterval(()=>{
-      var newArray = this.state.data.slice()
+      var newArray = this.state.data.datasets[0].data.slice()
       newArray.shift()
-      newArray.push({uv:Math.random()})
+      newArray.push(Math.random())
+      console.log(newArray)
+      var newState = Object.assign({},chartData,{datasets:[Object.assign({},chartData.datasets[0],{data:newArray})]})
       this.setState({
-        data: newArray
+        data: newState
       })
-      console.log(this.state.data)
-    }, 500);
+      //console.log(this.state.data)
+    }, 100);
 
   }
 
   render() {
-
+    console.log(this.state.data)
     return <Graph title="test" data={this.state.data} newData={this.newData} width={width} height={height}/>
   }
 }

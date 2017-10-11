@@ -1,12 +1,10 @@
 import React from 'react'
-import { LineChart, Line } from 'recharts';
+import {Line} from 'react-chartjs-2'
 
 const Graph = ({title, data, newData, test, width, height}) => (
   <div>
     <p> Graph </p>
-    <LineChart width={width} height={height} data={data}>
-      <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-    </LineChart>
+    <Line  data={data} options={{animation:false}}/>
     <button onClick={()=>{newData()}}>Next</button>
   </div>
 
