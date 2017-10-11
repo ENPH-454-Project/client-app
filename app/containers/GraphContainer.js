@@ -5,7 +5,7 @@ import Graph from '../components/Graph'
 var chartData = [{test:1}]
 var loopData = [{uv:Math.random()}]
 
-for(var i=0;i<300;i++){
+for(var i=0;i<50;i++){
   loopData.push({uv:Math.random()})
 }
 
