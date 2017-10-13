@@ -1,13 +1,16 @@
 import React from 'react'
-import SPI from 'pi-spi'
+import SPI from 'spi'
 
 
 var spi = SPI.initialize("/dev/spidev0.0")
 
 var data = [0,1,2,3,4]
+var buff = new Buffer(8)
 
-
-var spi = SPI.initialize("/dev/spidev0.0")
+var spi = new SPI.Spi('/dev/spidev0.0', {
+    'mode': SPI.MODE['MODE_0'],  // always set mode as the first option
+    'chipSelect': SPI.CS['none'] // 'none', 'high' - defaults to low
+  }, function(s){s.open();});
 
 export default class DataCollection extends React.Component{
   constructor(props){
@@ -27,9 +30,9 @@ export default class DataCollection extends React.Component{
     })
   }
   readData() {
-    spi.read(10, (data)=>{
+    spi.read(buff, function(device, buf2){
       this.setState({
-        data:data
+        data:buf2
       })
     })
   }
