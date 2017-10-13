@@ -31,6 +31,7 @@ export default class DataCollection extends React.Component{
   }
   readData() {
     spi.read(buff, function(device, buf2){
+      console.log(buf2)
       this.setState({
         data:buf2
       })
