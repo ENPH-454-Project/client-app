@@ -1,5 +1,5 @@
 import React from 'react'
-import {SoftSPI} from 'rpi-softspi'
+//import {SoftSPI} from 'rpi-softspi'
 
 let client = new SoftSPI({
    clock: 15,     // pin number of SCLK
