@@ -24,7 +24,11 @@ const config = {
 			filename: 'index.html',
 			inject: 'body'
 		})
-	]
+	],
+	node: {
+	    fs: 'empty',
+	    child_process: 'empty'
+  	}
 };
 
 module.exports = config;
