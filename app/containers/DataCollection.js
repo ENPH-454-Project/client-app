@@ -1,6 +1,5 @@
 import React from 'react'
 import SPI from 'pi-spi'
-var SPI = require('pi-spi');
 
 
 var spi = SPI.initialize("/dev/spidev0.0")
