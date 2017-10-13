@@ -24,7 +24,10 @@ const config = {
 			filename: 'index.html',
 			inject: 'body'
 		})
-	]
+	],
+	browser: {
+	  fs: 'empty'
+	}
 };
 
 module.exports = config;
