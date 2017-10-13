@@ -1,16 +1,15 @@
 import React from 'react'
-import SPI from 'spi'
+import SoftSPI from 'rpi-softspi'
 
-
-var spi = SPI.initialize("/dev/spidev0.0")
-
-var data = [0,1,2,3,4]
-var buff = new Buffer(8)
-
-var spi = new SPI.Spi('/dev/spidev0.0', {
-    'mode': SPI.MODE['MODE_0'],  // always set mode as the first option
-    'chipSelect': SPI.CS['none'] // 'none', 'high' - defaults to low
-  }, function(s){s.open();});
+let client = new SoftSPI({
+   clock: 15,     // pin number of SCLK
+   mosi: 11,      // pin number of MOSI
+   miso: 13,      // pin number of MISO
+   client: 16,    // pin number of CS
+   clientSelect: rpio.LOW, // trigger signal for the client
+   mode: 0,                // clock mode (0 - 3)
+   bitOrder: SoftSPI.MSB   // bit order in communication
+})
 
 export default class DataCollection extends React.Component{
   constructor(props){
@@ -30,11 +29,10 @@ export default class DataCollection extends React.Component{
     })
   }
   readData() {
-    spi.read(buff, function(device, buf2){
-      console.log(buf2)
-      this.setState({
-        data:buf2
-      })
+    let bytes = client.read(5)
+    console.log(bytes)
+    this.setState({
+      data:bytes
     })
   }
   render() {
