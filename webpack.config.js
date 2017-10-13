@@ -25,7 +25,7 @@ const config = {
 			inject: 'body'
 		})
 	],
-	browser: {
+	node: {
 	  fs: 'empty'
 	}
 };
