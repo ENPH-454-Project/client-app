@@ -1,6 +1,6 @@
 import React from 'react'
 import GraphContainer from './containers/GraphContainer'
-import DataCollection from './containers/DataCollection'
+
 
 
 export default class App extends React.Component {
@@ -14,8 +14,8 @@ export default class App extends React.Component {
   render() {
     return(
       <div>
-        <h1>Hello World</h1>
-        <DataCollection />
+        <h1>Hello World!</h1>
+        <GraphContainer />
       </div>
     )
   }
