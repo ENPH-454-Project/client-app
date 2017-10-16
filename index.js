@@ -11,7 +11,7 @@ const bodyParser = require('body-parser')
 app.use(cors())
 app.use(bodyParser.json())
 
-axios.post('https://vdlmikqfqd.execute-api.us-east-1.amazonaws.com/prod/dsp-service', {
+axios.post('https://vdlmikqfqd.execute-api.us-east-1.amazonaws.com/prod/test', {
   data:[1,2,3,4,5]
   })
   .then(function(res) {
@@ -23,6 +23,6 @@ axios.post('https://vdlmikqfqd.execute-api.us-east-1.amazonaws.com/prod/dsp-serv
 
   // Server Port
 app.listen(3000,function() {
-	console.log('App listening on port', port)
+	console.log('App listening on port 3000')
 })
  module.exports = app;
