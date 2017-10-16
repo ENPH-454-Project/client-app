@@ -11,12 +11,9 @@ let client = new SoftSPI({
    mosi: 11,      // pin number of MOSI
    miso: 13,      // pin number of MISO
    client: 16,    // pin number of CS
-   clientSelect: rpio.LOW, // trigger signal for the client
-   mode: 0,                // clock mode (0 - 3)
-   bitOrder: SoftSPI.MSB   // bit order in communication
 })
 
-
+client.open()
 
 //Middleware
 app.use(cors())
@@ -32,8 +29,11 @@ axios.post('https://vdlmikqfqd.execute-api.us-east-1.amazonaws.com/prod/test', {
     console.log(error.response.status + ', ' + error.response.statusText)
   })
 
-  let bytes = client.read(5)
-  console.log(bytes)
+
+let bytes = client.read(5)
+console.log(bytes)
+
+
   // Server Port
 app.listen(3000,function() {
 	console.log('App listening on port 3000')
