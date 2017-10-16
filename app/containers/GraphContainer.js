@@ -1,5 +1,6 @@
 import React from 'react'
 import Graph from '../components/Graph'
+import axios from 'axios'
 
 // load your general data
 var loopData = [Math.random()]
@@ -42,13 +43,15 @@ export default class GraphContainer extends React.Component{
   constructor(props){
     super(props)
     this.state={
-      data:chartData
+      data:chartData,
+      serverRes:''
     }
     this.newData = this.newData.bind(this)
+    this.testServer = this.testServer.bind(this)
   }
 
   newData() {
-    self = this;
+    var self = this;
     window.setInterval(()=>{
       var newArray = this.state.data.datasets[0].data.slice()
       newArray.shift()
@@ -63,8 +66,24 @@ export default class GraphContainer extends React.Component{
 
   }
 
+  testServer() {
+    var self = this;
+    axios.post('https://vdlmikqfqd.execute-api.us-east-1.amazonaws.com/prod/test', {
+      data:[1,2,3,4,5]
+      })
+      .then(function(res) {
+        self.setState({
+          serverRes: res.data
+        })
+        console.log(res.data)
+      })
+      .catch(function(error) {
+        console.log(error.response.status + ', ' + error.response.statusText)
+      })
+  }
+
   render() {
     console.log(this.state.data)
-    return <Graph title="test" data={this.state.data} newData={this.newData} width={width} height={height}/>
+    return <Graph title="test" data={this.state.data} newData={this.newData} serverRes={this.state.serverRes} width={width} height={height} testServer={this.testServer}/>
   }
 }
