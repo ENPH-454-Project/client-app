@@ -43,7 +43,7 @@ spi.read(10, function(e,d){
 
 
 let bytes = client.read(5)
-console.log(bytes)
+console.log('bytes: ' + bytes)
 
 
   // Server Port
