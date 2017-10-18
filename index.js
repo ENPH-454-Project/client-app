@@ -33,12 +33,14 @@ axios.post('https://vdlmikqfqd.execute-api.us-east-1.amazonaws.com/prod/test', {
   })
 
 // Collect Data
-spi.read(10, function(e,d){
-  if(e) console.log('error'+e)
-  else {
-    console.log('data: '+d)
-  }
-})
+while(true){
+  spi.read(10, function(e,d){
+    if(e) console.log('error'+e)
+    else {
+      console.log('data: '+d)
+    }
+  })
+}
 
 
 
