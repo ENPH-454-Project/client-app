@@ -4,9 +4,18 @@ import axios from 'axios'
 
 // load your general data
 var loopData = [Math.random()]
+var serverData = []
 for(var i=0;i<50;i++){
   loopData.push(Math.random())
 }
+//Server Data
+axios.get('localhost://3000/data')
+    .then(function(res){
+      serverData = res.data
+    })
+
+setTimeout(function(){}, 3000)
+
 var chartData = {
   labels: ['','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''],
   datasets: [
@@ -29,7 +38,7 @@ var chartData = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: loopData
+      data: serverData
     }
   ]}
 

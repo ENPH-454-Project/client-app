@@ -25,6 +25,10 @@ client.open()
 app.use(cors())
 app.use(bodyParser.json())
 
+app.get('/data', function(req,res){
+  res.send(JSON.stringify(dataArray))
+})
+
 /*
 axios.post('https://vdlmikqfqd.execute-api.us-east-1.amazonaws.com/prod/test', {
   data:[1,2,3,4,5]
@@ -62,10 +66,9 @@ console.log(dataArray)
 let bytes = client.read(5)
 console.log('bytes: ' + bytes)
 */
-/*
+
   // Server Port
 app.listen(3000,function() {
 	console.log('App listening on port 3000')
 })
  module.exports = app;
-*/
