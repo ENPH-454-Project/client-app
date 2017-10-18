@@ -9,6 +9,9 @@ const SPI = require('pi-spi');
 
 const spi = SPI.initialize("/dev/spidev0.0")
 
+var dataArray = []
+var lastValue = 0
+
 let client = new SoftSPI({
    clock: 15,     // pin number of SCLK
    mosi: 11,      // pin number of MOSI
@@ -22,6 +25,7 @@ client.open()
 app.use(cors())
 app.use(bodyParser.json())
 
+/*
 axios.post('https://vdlmikqfqd.execute-api.us-east-1.amazonaws.com/prod/test', {
   data:[1,2,3,4,5]
   })
@@ -31,25 +35,37 @@ axios.post('https://vdlmikqfqd.execute-api.us-east-1.amazonaws.com/prod/test', {
   .catch(function(error) {
     console.log(error.response.status + ', ' + error.response.statusText)
   })
+*/
 
 // Collect Data
-while(true){
+
+for(var i=0; i<30; i++){
   spi.read(10, function(e,d){
     if(e) console.log('error'+e)
     else {
-      console.log('data: '+d)
+	lastValue = lastValue+1
+	//lastValue = (d[0] & 0xFF) | ((d[1] & 0x0F) << 8)
+	dataArray.push(lastValue)
+      //console.log('data: ')
+	console.log(lastValue)
     }
   })
+ //console.log(lastValue)
 }
 
 
 
+console.log(dataArray)
+
+
+/*
 let bytes = client.read(5)
 console.log('bytes: ' + bytes)
-
-
+*/
+/*
   // Server Port
 app.listen(3000,function() {
 	console.log('App listening on port 3000')
 })
  module.exports = app;
+*/
