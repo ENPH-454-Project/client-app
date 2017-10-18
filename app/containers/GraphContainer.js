@@ -9,9 +9,10 @@ for(var i=0;i<50;i++){
   loopData.push(Math.random())
 }
 //Server Data
-axios.get('localhost://3000/data')
+axios.get('http://localhost:3000/data')
     .then(function(res){
       serverData = res.data
+	console.log(res.data)
     })
 
 setTimeout(function(){}, 3000)
