@@ -9,13 +9,8 @@ for(var i=0;i<50;i++){
   loopData.push(Math.random())
 }
 //Server Data
-axios.get('http://localhost:3000/data')
-    .then(function(res){
-      serverData = res.data
-	console.log(res.data)
-    })
 
-setTimeout(function(){}, 3000)
+
 
 var chartData = {
   labels: ['','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''],
@@ -58,6 +53,7 @@ export default class GraphContainer extends React.Component{
     }
     this.newData = this.newData.bind(this)
     this.testServer = this.testServer.bind(this)
+    this.getData = this.getData.bind(this)
   }
 
   newData() {
@@ -92,8 +88,19 @@ export default class GraphContainer extends React.Component{
       })
   }
 
+  getData() {
+    const self = this;
+    axios.get('http://localhost:3000/data')
+        .then(function(res){
+          var newState = Object.assign({},chartData,{datasets:[Object.assign({},chartData.datasets[0],{data:res.data})]})
+          this.setState({
+            data: newState
+          })
+        })
+  }
+
   render() {
     console.log(this.state.data)
-    return <Graph title="test" data={this.state.data} newData={this.newData} serverRes={this.state.serverRes} width={width} height={height} testServer={this.testServer}/>
+    return <Graph title="test" data={this.state.data} newData={this.newData} serverRes={this.state.serverRes} width={width} height={height} testServer={this.testServer} getData={this.getData}/>
   }
 }
