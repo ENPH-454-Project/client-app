@@ -5,6 +5,9 @@ const app = express()
 const path = require('path')
 const bodyParser = require('body-parser')
 const SoftSPI = require('rpi-softspi')
+const SPI = require('pi-spi');
+
+const spi = SPI.initialize("/dev/spidev0.0")
 
 let client = new SoftSPI({
    clock: 15,     // pin number of SCLK
@@ -28,6 +31,15 @@ axios.post('https://vdlmikqfqd.execute-api.us-east-1.amazonaws.com/prod/test', {
   .catch(function(error) {
     console.log(error.response.status + ', ' + error.response.statusText)
   })
+
+// Collect Data
+spi.read(10, function(e,d){
+  if(e) console.log('error'+e)
+  else {
+    console.log(d)
+  }
+})
+
 
 
 let bytes = client.read(5)
