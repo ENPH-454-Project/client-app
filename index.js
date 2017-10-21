@@ -56,8 +56,28 @@ for(var i=0; i<30; i++){
   })
  //console.log(lastValue)
 }
+// Recursive
+
+function liveData(resolve, reject) {
+  spi.read(10, function(e,d){
+    if(e) console.log('error'+e)
+      reject(e)
+    else {
+	//lastValue = (d[0] & 0xFF) | ((d[1] & 0x0F) << 8)
+    	dataArray.push(lastValue)
+          //console.log('data: ')
+    	console.log(lastValue)
+      liveData(resolve)
+    }
+  })
+}
 
 
+new Promise((r, j) => {
+    asyncOp(r, j);
+}).then((e) => {
+    //This will call if your algorithm succeeds!
+});
 
 console.log(dataArray)
 
