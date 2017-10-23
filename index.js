@@ -60,8 +60,9 @@ for(var i=0; i<10000; i++){
 
 function liveData(resolve, reject) {
   spi.read(10, function(e,d){
-    if(e) console.log('error'+e)
+    if(e) {console.log('error'+e) 
       reject(e)
+	}
     else {
 	//lastValue = (d[0] & 0xFF) | ((d[1] & 0x0F) << 8)
     	dataArray.push(lastValue)
