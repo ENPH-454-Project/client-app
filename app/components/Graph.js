@@ -10,7 +10,6 @@ const Graph = ({title, data, newData, test, width, height, serverRes, testServer
     <button onClick={()=>{newData()}}>Next</button>
     <button onClick={()=>{getData()}}>getData</button>
   </div>
-
 )
 
 export default Graph
