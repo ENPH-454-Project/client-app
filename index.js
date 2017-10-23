@@ -72,20 +72,24 @@ function liveData(resolve, reject) {
   })
 }
 
+function liveDataSoft(resolve, reject) {
+  let bytes = client.read(5)
+  liveDataSoft(resolve)
+}
 
 new Promise((r, j) => {
-    asyncOp(r, j);
+    liveData(r, j);
 }).then((e) => {
+    console.log('Finished')
+    console.log(dataArray)
     //This will call if your algorithm succeeds!
 });
 
-console.log(dataArray)
 
 
-/*
-let bytes = client.read(5)
-console.log('bytes: ' + bytes)
-*/
+
+
+
 
   // Server Port
 app.listen(3000,function() {
