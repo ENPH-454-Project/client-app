@@ -74,11 +74,9 @@ function liveData(resolve, reject) {
   })
 }
 */
-//let bytes = client.read(5)
-//console.log(bytes)
 
 function liveDataSoft(resolve, reject) {
-  let bytes = client.read(1/8)
+  let bytes = client.read(1)
   console.log(bytes.reduce((a, b) => a + b, 0))
   setTimeout(()=>liveDataSoft(resolve),1000)
 }
