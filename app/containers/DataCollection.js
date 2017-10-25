@@ -29,7 +29,7 @@ export default class DataCollection extends React.Component{
     })
   }
   readData() {
-    let bytes = client.read(5)
+    let bytes = client.read(1/8)
     console.log(bytes)
     this.setState({
       data:bytes
