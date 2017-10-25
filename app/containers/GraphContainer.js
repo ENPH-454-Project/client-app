@@ -93,7 +93,7 @@ export default class GraphContainer extends React.Component{
     axios.get('http://localhost:3000/data')
         .then(function(res){
           var newState = Object.assign({},chartData,{datasets:[Object.assign({},chartData.datasets[0],{data:res.data})]})
-          this.setState({
+          self.setState({
             data: newState
           })
         })

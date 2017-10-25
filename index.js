@@ -43,12 +43,12 @@ axios.post('https://vdlmikqfqd.execute-api.us-east-1.amazonaws.com/prod/test', {
 
 // Collect Data
 
-for(var i=0; i<30; i++){
-  spi.read(10, function(e,d){
+for(var i=0; i<10000; i++){
+  spi.read(2, function(e,d){
     if(e) console.log('error'+e)
     else {
-	lastValue = lastValue+1
-	//lastValue = (d[0] & 0xFF) | ((d[1] & 0x0F) << 8)
+	//lastValue = lastValue+1
+	lastValue = (d[0] & 0xFF) | ((d[1] & 0x0F) << 8)
 	dataArray.push(lastValue)
       //console.log('data: ')
 	console.log(lastValue)
@@ -60,8 +60,9 @@ for(var i=0; i<30; i++){
 
 function liveData(resolve, reject) {
   spi.read(10, function(e,d){
-    if(e) console.log('error'+e)
+    if(e) {console.log('error'+e) 
       reject(e)
+	}
     else {
 	//lastValue = (d[0] & 0xFF) | ((d[1] & 0x0F) << 8)
     	dataArray.push(lastValue)
