@@ -12,11 +12,11 @@ const spi = SPI.initialize("/dev/spidev0.0")
 var dataArray = []
 var lastValue = 0
 
-let client = new SoftSPI({
+var client = new SoftSPI({
    clock: 15,     // pin number of SCLK
    mosi: 11,      // pin number of MOSI
    miso: 13,      // pin number of MISO
-   client: 16,    // pin number of CS
+   client: 16    // pin number of CS
 })
 
 client.open()
@@ -42,7 +42,7 @@ axios.post('https://vdlmikqfqd.execute-api.us-east-1.amazonaws.com/prod/test', {
 */
 
 // Collect Data
-
+/*
 for(var i=0; i<10000; i++){
   spi.read(2, function(e,d){
     if(e) console.log('error'+e)
@@ -56,8 +56,9 @@ for(var i=0; i<10000; i++){
   })
  //console.log(lastValue)
 }
+*/
 // Recursive
-
+/*
 function liveData(resolve, reject) {
   spi.read(10, function(e,d){
     if(e) {console.log('error'+e) 
@@ -72,24 +73,24 @@ function liveData(resolve, reject) {
     }
   })
 }
+*/
+//let bytes = client.read(5)
+//console.log(bytes)
 
 function liveDataSoft(resolve, reject) {
-  let bytes = client.read(5)
-  liveDataSoft(resolve)
+  let bytes = client.read(1/8)
+  console.log(bytes.reduce((a, b) => a + b, 0))
+  setTimeout(()=>liveDataSoft(resolve),1000)
 }
 
+
 new Promise((r, j) => {
-    liveData(r, j);
+    liveDataSoft(r, j);
 }).then((e) => {
     console.log('Finished')
     console.log(dataArray)
     //This will call if your algorithm succeeds!
 });
-
-
-
-
-
 
 
   // Server Port
