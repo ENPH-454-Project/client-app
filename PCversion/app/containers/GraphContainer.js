@@ -34,7 +34,7 @@ var chartData = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: serverData
+      data: loopData
     }
   ]}
 

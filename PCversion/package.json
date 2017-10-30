@@ -44,6 +44,8 @@
     "react-router-dom": "^4.2.2",
     "react-tap-event-plugin": "^3.0.2",
     "sass-loader": "^6.0.6",
+    "socket.io": "^2.0.4",
+    "socket.io-client": "^2.0.4",
     "style-loader": "^0.18.2",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"

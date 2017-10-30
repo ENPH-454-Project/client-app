@@ -1,5 +1,6 @@
 import React from 'react'
 import GraphContainer from './containers/GraphContainer'
+import Test from './containers/Test'
 
 
 
@@ -14,7 +15,7 @@ export default class App extends React.Component {
     return(
       <div>
         <h1>Laser Microphone</h1>
-        <GraphContainer />
+        <Test />
       </div>
     )
   }
