@@ -50,6 +50,9 @@ io.on('connection', (socket)=>{
       socket.emit('timer', new Date())
     }, interval)
   })
+  socket.on('callback', (data, fn)=>{
+    fn('data')
+  })
   socket.on('disconnect', ()=>{
     console.log('Someone Disconnected')
   })

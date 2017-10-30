@@ -20,6 +20,9 @@ export default class Test extends React.Component{
         data:timestamp
       })
     })
+    socket.emit('callback', 'TEST', (data)=>{
+      console.log(data)
+    })
     socket.emit('subscribeToTimer',1000)
   }
 
