@@ -19,6 +19,9 @@ var client = new SoftSPI({
    client: 16    // pin number of CS
 })
 
+var dataCount = 0
+const packetLength = 10;
+
 client.open()
 
 //Middleware
@@ -61,7 +64,7 @@ for(var i=0; i<10000; i++){
 /*
 function liveData(resolve, reject) {
   spi.read(10, function(e,d){
-    if(e) {console.log('error'+e) 
+    if(e) {console.log('error'+e)
       reject(e)
 	}
     else {
