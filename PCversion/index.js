@@ -6,13 +6,46 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const server = require('http').Server(app)
 const io =  require('socket.io')(server)
+const Speaker = require('speaker')
 // const createSpeaker = require('audio-speaker')
 // const createGenerator = require('audio-generator')
 // const coreAudio = require('node-core-audio')
 //const engine = coreAudio.createNewAudioEngine()
 
+// Audio Context
+var audioContext = new AudioContext();
+var osc = audioContext.createOscillator();
+
+var real = new Float32Array([0,0.4,0.4,1,1,1,0.3,0.7,0.6,0.5,0.9,0.8]);
+
+var imag = new Float32Array(real.length);
+var hornTable = audioContext.createPeriodicWave(real, imag);
+
+osc = audioContext.createOscillator();
+osc.setPeriodicWave(hornTable);
+osc.frequency.value = 160;
+osc.connect(audioContext.destination);
+osc.start(0);
 
 
+
+// Speaker
+/*
+const speaker = new Speaker({
+  channels: 1,
+  bitDepth: 8,
+  sampleRate: 44100
+})
+var audioArray=[]
+for(var n=0;n<44100;n++){
+  audioArray.push(new Buffer(Math.sin(2*Math.pi*100*n)))
+}
+
+
+process.stdin.pipe(speaker)
+
+speaker.write(audioArray)
+*/
 
 // node-core-audio
 /*
@@ -26,7 +59,7 @@ console.log(buffer)
 engine.write(buffer)
 */
 
-
+// Variables and Constants
 var dataArray = []
 var lastValue = 0
 var DSPArray = []
