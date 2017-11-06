@@ -6,13 +6,26 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const server = require('http').Server(app)
 const io =  require('socket.io')(server)
+// const createSpeaker = require('audio-speaker')
+// const createGenerator = require('audio-generator')
+// const coreAudio = require('node-core-audio')
+//const engine = coreAudio.createNewAudioEngine()
 
+
+
+
+// node-core-audio
 /*
-const SoftSPI = require('rpi-softspi')
-const SPI = require('pi-spi');
-
-const spi = SPI.initialize("/dev/spidev0.0")
+var audio = []
+var buffer = engine.read()
+for(var r = 0; r<100000;r++){
+  audio.push(Math.random(255))
+}
+console.log(Object.prototype.toString.call(audio))
+console.log(buffer)
+engine.write(buffer)
 */
+
 
 var dataArray = []
 var lastValue = 0
@@ -20,7 +33,12 @@ var DSPArray = []
 var dataCount = 0
 const packetLength = 10;
 
+// rpi-softspi
 /*
+const SoftSPI = require('rpi-softspi')
+const SPI = require('pi-spi');
+
+const spi = SPI.initialize("/dev/spidev0.0")
 var client = new SoftSPI({
    clock: 15,     // pin number of SCLK
    mosi: 11,      // pin number of MOSI
@@ -51,7 +69,7 @@ io.on('connection', (socket)=>{
     }, interval)
   })
   socket.on('callback', (data, fn)=>{
-    fn('data')
+    fn(data)
   })
   socket.on('disconnect', ()=>{
     console.log('Someone Disconnected')
