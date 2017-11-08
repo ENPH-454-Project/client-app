@@ -1,0 +1,3 @@
+[y,Fs] = audioread('test.m4a')
+sound(y,Fs)
+f2 = fit(y,(1:length(y))','fourier8')
