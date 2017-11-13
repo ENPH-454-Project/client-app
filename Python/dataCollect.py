@@ -67,10 +67,19 @@ last_read = 0       # this keeps track of the last potentiometer value
 tolerance = 5       # to keep from being jittery we'll only change
                     # volume when the pot has moved more than 5 'counts'
 
+# Plot
+plt.axis([0, 1000, 0, 1])
+plt.ion()
+x = 0
+
 while True:
         # read the analog pin
+        if x>1000:
+            plt.axis([x-1000, x, 0, 2048])
         value = readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
         print value
-
+        plt.scatter(x, value)
+        plt.pause(0.005)
+        x++
         # hang out and do nothing for a half second
         time.sleep(0.5)
