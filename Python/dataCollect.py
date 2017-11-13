@@ -6,6 +6,8 @@
 import time
 import os
 import RPi.GPIO as GPIO
+import numpy as np
+import matplotlib.pyplot as plt
 
 GPIO.setmode(GPIO.BCM)
 DEBUG = 1
