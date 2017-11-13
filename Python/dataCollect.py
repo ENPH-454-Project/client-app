@@ -73,4 +73,4 @@ while True:
         plt.pause(0.005)
         x=x+1
         # hang out and do nothing for a half second
-        time.sleep(0.5)
+        time.sleep(0.005)
