@@ -71,4 +71,4 @@ while True:
         print value
 
         # hang out and do nothing for a half second
-        time.sleep(0.5)
+        time.sleep(0.005)
