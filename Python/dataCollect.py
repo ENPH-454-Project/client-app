@@ -79,7 +79,7 @@ while True:
         value = readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
         print value
         plt.scatter(x, value)
-        plt.pause(0.005)
+        plt.pause(0.05)
         x=x+1
         # hang out and do nothing for a half second
-        time.sleep(0.005)
+        time.sleep(0.05)
