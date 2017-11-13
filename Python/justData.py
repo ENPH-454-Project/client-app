@@ -57,6 +57,7 @@ GPIO.setup(SPIMISO, GPIO.IN)
 GPIO.setup(SPICLK, GPIO.OUT)
 GPIO.setup(SPICS, GPIO.OUT)
 
+potentiometer_adc = 0;
 
 while True:
         # read the analog pin
