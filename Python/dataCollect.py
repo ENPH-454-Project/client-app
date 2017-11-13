@@ -68,7 +68,7 @@ tolerance = 5       # to keep from being jittery we'll only change
                     # volume when the pot has moved more than 5 'counts'
 
 # Plot
-plt.axis([0, 1000, 0, 1])
+plt.axis([0, 1000, 0, 2048])
 plt.ion()
 x = 0
 
@@ -82,4 +82,4 @@ while True:
         plt.pause(0.005)
         x=x+1
         # hang out and do nothing for a half second
-        time.sleep(0.5)
+        time.sleep(0.005)
