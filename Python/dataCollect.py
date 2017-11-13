@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-# Written by Limor "Ladyada" Fried for Adafruit Industries, (c) 2015
-# This code is released into the public domain
 
 import time
 import os
@@ -60,13 +58,6 @@ GPIO.setup(SPIMISO, GPIO.IN)
 GPIO.setup(SPICLK, GPIO.OUT)
 GPIO.setup(SPICS, GPIO.OUT)
 
-# 10k trim pot connected to adc #0
-potentiometer_adc = 0;
-
-last_read = 0       # this keeps track of the last potentiometer value
-tolerance = 5       # to keep from being jittery we'll only change
-                    # volume when the pot has moved more than 5 'counts'
-
 # Plot
 plt.axis([0, 1000, 0, 1])
 plt.ion()
@@ -80,6 +71,6 @@ while True:
         print value
         plt.scatter(x, value)
         plt.pause(0.005)
-        x++
+        x=x+1
         # hang out and do nothing for a half second
         time.sleep(0.5)
