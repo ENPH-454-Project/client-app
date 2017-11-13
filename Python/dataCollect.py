@@ -70,10 +70,5 @@ while True:
         value = readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
         print value
 
-        if DEBUG:
-                print "trim_pot:", trim_pot
-                print "pot_adjust:", pot_adjust
-                print "last_read", last_read
-
         # hang out and do nothing for a half second
         time.sleep(0.5)
