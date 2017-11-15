@@ -8,7 +8,7 @@ import os
 import RPi.GPIO as GPIO
 import numpy as np
 import matplotlib.pyplot as plt
-from msvcrt import getch
+import getch
 
 GPIO.setmode(GPIO.BCM)
 DEBUG = 1
