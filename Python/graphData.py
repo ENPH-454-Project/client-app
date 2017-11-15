@@ -8,7 +8,7 @@ import os
 import RPi.GPIO as GPIO
 import numpy as np
 import matplotlib.pyplot as plt
-import getch
+import keyboard
 
 GPIO.setmode(GPIO.BCM)
 DEBUG = 1
@@ -74,8 +74,8 @@ plt.ion()
 x = 0
 
 while True:
-    key = ord(getch())
-    if key == 27: #ESC
+    if keyboard.is_pressed('q'):
+        print('You Pressed A Key!')
         break
     # read the analog pin
     if x>1000:
