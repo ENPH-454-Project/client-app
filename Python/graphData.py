@@ -76,7 +76,7 @@ x = 0
 try:
     while True:
         if keyboard.is_pressed('q'):
-            print('You Pressed A Key!')
+            print 'You Pressed A Key!'
             sys.exit()
         # read the analog pin
         if x>1000:
@@ -89,4 +89,4 @@ try:
         # hang out and do nothing for a half second
         time.sleep(0.05)
 except KeyboardInterrupt:
-    pass
+    print 'Intereputed'
