@@ -9,6 +9,7 @@ import RPi.GPIO as GPIO
 import numpy as np
 import matplotlib.pyplot as plt
 import keyboard
+import sys
 
 GPIO.setmode(GPIO.BCM)
 DEBUG = 1
@@ -76,7 +77,7 @@ x = 0
 while True:
     if keyboard.is_pressed('q'):
         print('You Pressed A Key!')
-        break
+        sys.exit()
     # read the analog pin
     if x>1000:
         plt.axis([x-1000, x, 0, 2048])
