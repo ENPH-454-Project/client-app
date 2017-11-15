@@ -73,8 +73,9 @@ tolerance = 5       # to keep from being jittery we'll only change
 plt.axis([0, 1000, 0, 2048])
 plt.ion()
 x = 0
-try:
-    while True:
+
+while True:
+    try:
         if keyboard.is_pressed('q'):
             print 'You Pressed A Key!'
             sys.exit()
@@ -88,5 +89,6 @@ try:
         x=x+1
         # hang out and do nothing for a half second
         time.sleep(0.05)
-except KeyboardInterrupt:
-    print 'Intereputed'
+    except KeyboardInterrupt:
+        break
+        print 'Intereputed'
