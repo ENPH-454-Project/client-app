@@ -74,7 +74,6 @@ plt.ion()
 x = 0
 
 while True:
-    while True:
     key = ord(getch())
     if key == 27: #ESC
         break
