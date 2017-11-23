@@ -74,6 +74,8 @@ plt.axis([0, 1000, 0, 2048])
 plt.ion()
 x = 0
 
+
+
 while True:
     try:
         if keyboard.is_pressed('q'):
