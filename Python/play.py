@@ -1,20 +1,39 @@
 import pyaudio
 import wave
 import math
+import numpy as np
+from scipy.io.wavfile import read, write
+import time
 
 p = pyaudio.PyAudio()
-
-stream = p.open(format=p.get_format_from_width(width=1),
+freq = 440
+bitrate = 44100
+stream = p.open(format=p.get_format_from_width(1),
                 channels=1,
-                rate=40000,
+                rate=bitrate,
                 output=True)
+x = np.array(read('rec.wav')[1],dtype=np.int16)
+print x.max(), x.min()
 
-data = [0]
-for i in range(100000):
-    data.append(255*math.sin(i))
+data = np.array([])
+sound = ''
+i=0
 
-data.tobytes()
-stream.write(data)
+while True:
+    global i
+    new = np.array([int(127*math.sin(i/((bitrate/freq)/(2*math.pi)))+128)])
+    data = np.append(data,new)
+    sound += chr(int(data[i]))
+    i = i + 1
+    print i
+    if i < 100:
+        print i
+        #stream.write(sound)
+        #sound = ''
+
+print data
+
+#sound.tobytes()
 
 # while data != '':
 #     stream.write(data)

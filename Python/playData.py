@@ -6,10 +6,20 @@ import matplotlib.pyplot as plt
 import pyaudio
 import wave
 import sys
+import math
+from scipy.io.wavfile import read, write
 
 GPIO.setmode(GPIO.BCM)
 DEBUG = 1
 
+data=np.array([])
+p = pyaudio.PyAudio()
+freq = 440
+bitrate = 44100
+stream = p.open(format=p.get_format_from_width(1),
+                channels=1,
+                rate=bitrate,
+                output=True)
 # read SPI data from MCP3008 chip, 8 possible adc's (0 thru 7)
 def readadc(adcnum, clockpin, mosipin, misopin, cspin):
         if ((adcnum > 7) or (adcnum < 0)):
@@ -65,30 +75,28 @@ last_read = 0       # this keeps track of the last potentiometer value
 tolerance = 5       # to keep from being jittery we'll only change
                     # volume when the pot has moved more than 5 'counts'
 
+sound = ''
+i=0
 while True:
+        i +=1
         # read the analog pin
         value = readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
         print value
+        data = np.append(data,value)
         # hang out and do nothing for a half second
         time.sleep(0.05)
+        sound += chr(int(data[i]))
+        if i%100 == 0:
+            stream.write(sound)
+            sound = ''
 
 
-p = pyaudio.PyAudio()
+#sound.tobytes()
 
-stream = p.open(format=p.get_format_from_width(width=1),
-                channels=1,
-                rate=40000,
-                output=True)
 
-data = [0]
-for i in range(100000):
-    data.append(255*math.sin(i))
-
-stream.write(data)
-
-while data != '':
-    stream.write(data)
-    data = wf.readframes(CHUNK)
+# while data != '':
+#     stream.write(data)
+#     data = wf.readframes(CHUNK)
 
 stream.stop_stream()
 stream.close()
