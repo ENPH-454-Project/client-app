@@ -78,17 +78,18 @@ tolerance = 5       # to keep from being jittery we'll only change
 sound = ''
 i=0
 while True:
-        i +=1
-        # read the analog pin
-        value = readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
-        print value
-        data = np.append(data,value)
-        # hang out and do nothing for a half second
-        time.sleep(0.05)
-        sound += chr(int(data[i]))
-        if i%100 == 0:
-            stream.write(sound)
-            sound = ''
+    # read the analog pin
+    value = readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
+    print value
+    data = np.append(data,value)
+    # hang out and do nothing for a half second
+    sound += chr(int(data[i]))
+    i = i + 1
+    if keyboard.is_pressed('q'):
+        #break
+        np.savetxt('data.csv',data, delimiter=',')
+        stream.write(sound)
+        sound = ''
 
 
 #sound.tobytes()
