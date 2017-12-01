@@ -8,6 +8,7 @@ import wave
 import sys
 import math
 from scipy.io.wavfile import read, write
+import keyboard
 
 GPIO.setmode(GPIO.BCM)
 DEBUG = 1
