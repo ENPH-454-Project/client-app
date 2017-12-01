@@ -19,14 +19,12 @@ data = np.array([])
 sound = ''
 i=0
 
-while True:
-    global i
+while i<100:
     new = np.array([int(127*math.sin(i/((bitrate/freq)/(2*math.pi)))+128)])
     data = np.append(data,new)
     sound += chr(int(data[i]))
     i = i + 1
-    print i
-    if i < 100:
+    if (i == 10):
         print i
         #stream.write(sound)
         #sound = ''
