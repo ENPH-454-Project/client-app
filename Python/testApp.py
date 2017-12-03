@@ -6,6 +6,7 @@ import wave
 import scipy.io.wavfile as sciWav
 import pyaudio
 import requests
+import pygame
 
 
 on = False
@@ -55,31 +56,36 @@ def stop():
 def play():
     global sound
     filepath = 'you-need-to-grow-up.wav'
-    chunk = 1024
-    #open a wav format music
-    signal = wave.open(filepath)
-    print(signal)
-    #instantiate PyAudio
-    _pyaudio = pyaudio.PyAudio()
-    #open stream
-    stream = _pyaudio.open(format=_pyaudio.get_format_from_width(signal.getsampwidth()),
-                           channels=signal.getnchannels(),
-                           rate=signal.getframerate(),
-                           output=True)
-    #read data
-    data = signal.readframes(chunk)
-
-    #play stream
-    while data:
-        stream.write(data)
-        data = signal.readframes(chunk)
-
-    #stop stream
-    stream.stop_stream()
-    stream.close()
-
-    #close PyAudio
-    _pyaudio.terminate()
+    pygame.mixer.init()
+    pygame.mixer.music.load(filepath)
+    pygame.mixer.music.play()
+    while pygame.mixer.music.get_busy() == True:
+        continue
+    # chunk = 1024
+    # #open a wav format music
+    # signal = wave.open(filepath)
+    # print(signal)
+    # #instantiate PyAudio
+    # _pyaudio = pyaudio.PyAudio()
+    # #open stream
+    # stream = _pyaudio.open(format=_pyaudio.get_format_from_width(signal.getsampwidth()),
+    #                        channels=signal.getnchannels(),
+    #                        rate=signal.getframerate(),
+    #                        output=True)
+    # #read data
+    # data = signal.readframes(chunk)
+    #
+    # #play stream
+    # while data:
+    #     stream.write(data)
+    #     data = signal.readframes(chunk)
+    #
+    # #stop stream
+    # stream.stop_stream()
+    # stream.close()
+    #
+    # #close PyAudio
+    # _pyaudio.terminate()
 
 def loadAll():
     print requests.get('http://www.google.com')
