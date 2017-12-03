@@ -8,7 +8,17 @@ import scipy.io.wavfile as sciWav
 import pyaudio
 import requests
 import pygame
+import boto3
+import re
+import os
+from os import listdir
+from os.path import isfile, join
 
+
+
+bucket_name = 'enph454-dsp-bucket'
+rec_path = './recordings'
+cloud_sync_path = './'
 
 on = False
 i=0
@@ -16,9 +26,13 @@ data = np.array([])
 sound = ''
 audio = np.array([])
 
-def load():
-    global audio
-    audio = wave.open()
+def loadAll():
+	s3 = boto3.resource('s3')
+	for bucket in s3.buckets.all():
+		for obj in bucket.objects.all():
+			if obj.key.endswith('.wav'):
+				file_path = os.path.join(cloud_sync_path, obj.key)
+				s3.Object(obj.bucket_name, obj.key).download_file(file_path)
 
 def start():
     print 'start'
@@ -42,7 +56,6 @@ def DSP():
                    'signal': REC_AUDIO_ARRAY,
                    'order': ORDER}
         }
-    print DSPdata
 
 
 
@@ -63,15 +76,15 @@ def play():
     while pygame.mixer.music.get_busy() == True:
         continue
 
-def loadAll():
-    print requests.get('http://www.google.com')
-
-
-
 
 def saveAs():
+    global data
     filename = tkSimpleDialog.askstring("Name prompt", "enter your name") + '.wav'
-    sciWav.write(filename, 44000, data)
+    filepath = 'recordings/' + filename
+    sciWav.write(filepath, 44000, data)
+    s3 = boto3.resource('s3')
+    data = sciWav.read('./'+filepath)
+    s3.meta.client.upload_file('./'+filepath,bucket_name,filename)
 
 class App:
     def __init__(self, master):
