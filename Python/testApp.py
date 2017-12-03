@@ -15,7 +15,6 @@ from os import listdir
 from os.path import isfile, join
 
 
-
 bucket_name = 'enph454-dsp-bucket'
 rec_path = './recordings'
 cloud_sync_path = './'
