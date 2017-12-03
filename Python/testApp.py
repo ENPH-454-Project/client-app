@@ -24,7 +24,7 @@ def start():
     on = True
 
 def DSP():
-    REC_AUDIO = sciWav.read("rec.wav") 
+    REC_AUDIO = sciWav.read("rec.wav")
     REC_AUDIO_ARRAY = np.array(REC_AUDIO[1], dtype=np.int16)
     REC_SAMPLE_RATE = REC_AUDIO[0]
     HIGH_CUTOFF = 100000 # Hz
@@ -54,7 +54,7 @@ def stop():
 
 def play():
     global sound
-    filepath = 'rec.wav'
+    filepath = 'you-need-to-grow-up.wav'
     chunk = 1024
     #open a wav format music
     signal = wave.open(filepath)
