@@ -3,7 +3,6 @@ import tkSimpleDialog
 import numpy as np
 import random
 import wave
-# from scipy.io.wavfile import read, write
 import scipy.io.wavfile as sciWav
 import pyaudio
 import requests
