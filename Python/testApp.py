@@ -2,8 +2,10 @@ from Tkinter import Tk, Label, Button
 import numpy as np
 import random
 import wave
-from scipy.io.wavfile import read, write
+# from scipy.io.wavfile import read, write
+import scipy.io.wavfile as sciWav
 import pyaudio
+import requests
 
 
 on = False
@@ -21,14 +23,33 @@ def start():
     global on
     on = True
 
-def DSP(data):
+def DSP():
+    REC_AUDIO = sciWav.read("rec.wav") 
+    REC_AUDIO_ARRAY = np.array(REC_AUDIO[1], dtype=np.int16)
+    REC_SAMPLE_RATE = REC_AUDIO[0]
+    HIGH_CUTOFF = 100000 # Hz
+    LOW_CUTOFF = 0
+    CUTOFF = 100000
+    ORDER = 5
+    DSPdata= {
+        'dsp_suite': ['remove_interference_peak'],
+        'params': {'sample_rate': REC_SAMPLE_RATE,
+                   'high_cutoff': HIGH_CUTOFF,
+                   'low_cutoff': LOW_CUTOFF,
+                   'cutoff': CUTOFF,
+                   'signal': REC_AUDIO_ARRAY,
+                   'order': ORDER}
+    }
+    print DSPdata
+
+
 
 def stop():
     global on, sound, data
     on = False
     #break
     np.savetxt('data.csv',data, delimiter=',')
-    DSP(data)
+    DSP()
 
 
 def play():
@@ -61,13 +82,13 @@ def play():
     _pyaudio.terminate()
 
 def loadAll():
-
+    print requests.get('http://www.google.com')
 
 
 
 
 def saveAs():
-
+    print read()
 
 
 class App:
@@ -105,13 +126,8 @@ def read():
     global on, data, sound,i
     if on:
         value = random.randint(0,9)
-        print chr(value)
         data = np.append(data,value)
-        sound += chr(value)
-        #print data[i]
-
     root.after(100,read)
-    #root.after(100, read())
 
 
 root = Tk()
