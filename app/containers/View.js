@@ -2,7 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import {Card, CardHeader, CardText} from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
-import ReactAudioPlayer from 'react-audio-player';
+import ReactAudioPlayer from 'react-audio-player'
+import Waveform from '../components/Waveform'
 
 const files = require('../fakeFiles.json')
 
@@ -10,10 +11,11 @@ export default class View extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      audio:[]
+      audio:[],
+      files: files.files
     }
     this.loadFiles = this.loadFiles.bind(this)
-    this.play = this.play.bind(this)
+    this.refresh = this.refresh.bind(this)
   }
   loadFiles() {
     console.log('LoadFiles')
@@ -35,7 +37,15 @@ export default class View extends React.Component{
     })
   }
 
-  play(){
+  refresh(){
+    const self = this
+    setTimeout(function(){
+      console.log("Loaded");
+      var newFiles = self.state.files.push("demo.wav")
+      self.setState({
+        files: newFiles
+      })
+    }, 1000);
 
   }
 
@@ -49,8 +59,9 @@ export default class View extends React.Component{
                     <ReactAudioPlayer src={"Python/" + file} autoPlay={false} controls={true}/>
                  </Card>
         })}
+        <Waveform src="Python/you-need-to-grow-up.wav" />
         <RaisedButton label="Load Files" className="button" primary={true} onClick={this.loadFiles} />
-        <RaisedButton label="Play" primary={true} onClick={this.play} />
+        <RaisedButton label="Refresh" primary={true} onClick={this.refresh} />
 
       </Card>
     )

@@ -77,7 +77,7 @@ def play():
 
 def saveAs():
     global data
-    filename = tkSimpleDialog.askstring("Name prompt", "enter your name") + '.wav'
+    filename = tkSimpleDialog.askstring("File prompt", "Enter Filename") + '.wav'
     filepath = 'recordings/' + filename
     sciWav.write(filepath, 44000, data)
     s3 = boto3.resource('s3')
@@ -88,28 +88,28 @@ class App:
     def __init__(self, master):
         global on
         self.master = master
-        master.title("A simple GUI")
+        master.title("Laser Microphone Control")
 
-        self.label = Label(master, text=on)
+        self.label = Label(master, text='Laser Microphone Control')
         self.label.pack()
 
         self.start_button = Button(master, text="Start", command=start)
-        self.start_button.pack()
+        self.start_button.pack(side='left')
 
         self.stop_button = Button(master, text="Stop", command=stop)
-        self.stop_button.pack()
+        self.stop_button.pack(side='left')
 
         self.play_button = Button(master, text="Play", command=play)
-        self.play_button.pack()
+        self.play_button.pack(side='left')
 
         self.load_button = Button(master, text="Load", command=loadAll)
-        self.load_button.pack()
+        self.load_button.pack(side='left')
 
         self.save_button = Button(master, text="Save", command=saveAs)
-        self.save_button.pack()
+        self.save_button.pack(side='left')
 
         self.close_button = Button(master, text="Close", command=master.quit)
-        self.close_button.pack()
+        self.close_button.pack(side='left')
 
 
     def greet(self):

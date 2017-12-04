@@ -48,11 +48,14 @@
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.2.2",
     "react-tap-event-plugin": "^3.0.2",
+    "react-wavesurfer": "^0.8.6",
     "rpi-softspi": "^1.0.5",
     "sass-loader": "^6.0.6",
     "speaker": "^0.4.0",
     "style-loader": "^0.18.2",
     "wav": "^1.0.1",
+    "wavesurfer": "^1.3.4",
+    "wavesurfer.js": "^2.0.0-beta01",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"
   }
