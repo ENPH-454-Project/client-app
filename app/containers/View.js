@@ -45,7 +45,7 @@ export default class View extends React.Component{
       self.setState({
         files: newFiles
       })
-    }, 1000);
+    }, 1500);
 
   }
 
@@ -59,7 +59,7 @@ export default class View extends React.Component{
                     <ReactAudioPlayer src={"Python/" + file} autoPlay={false} controls={true}/>
                  </Card>
         })}
-        <Waveform src="Python/you-need-to-grow-up.wav" />
+        <Waveform src="Python/powerful-original.wav" />
         <RaisedButton label="Load Files" className="button" primary={true} onClick={this.loadFiles} />
         <RaisedButton label="Refresh" primary={true} onClick={this.refresh} />
 
